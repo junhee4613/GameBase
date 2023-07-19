@@ -8,7 +8,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
-
 public class ResourceManager
 {
     Dictionary<string, UnityEngine.Object> _resources = new Dictionary<string, Object>();
@@ -19,6 +18,7 @@ public class ResourceManager
         {
             return resource as T;
         }
+
         if(typeof(T) == typeof(Sprite))
         {
             key = key + ".sprite";
@@ -27,7 +27,9 @@ public class ResourceManager
                 return temp as T;
             }
         }
+
         return null;
+
     }
     public GameObject Instantiate(string key, Transform parent = null, bool pooling = false)
     {
@@ -37,6 +39,7 @@ public class ResourceManager
             Debug.LogError($"Failed to load prefab : { key}");
             return null;
         }
+
         if (pooling)
             return Managers.Pool.Pop(prefab);
 
@@ -65,6 +68,7 @@ public class ResourceManager
 
         asyncOperation.Completed += (op) =>
         {
+            //캐쉬확인
             if (_resources.TryGetValue(Key, out Object resource))
             {
                 callback?.Invoke(op.Result);
@@ -75,6 +79,7 @@ public class ResourceManager
             callback?.Invoke(op.Result);
         };
     }
+
     public void LoadAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
     {
         var OpHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
@@ -82,6 +87,7 @@ public class ResourceManager
         OpHandle.Completed += (op) =>
         {
             int loadCount = 0;
+
             int totalCount = op.Result.Count;
 
             foreach (var result in op.Result)

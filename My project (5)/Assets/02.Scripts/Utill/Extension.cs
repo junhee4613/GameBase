@@ -11,7 +11,7 @@ public static class Extension
 {
     public static T GetOrAddComponent<T>(this GameObject go)where T : UnityEngine.Component
     {
-        return Utill.GetOrAddComponent<T>(go);
+        return Util.GetOrAddComponent<T>(go);
     }
 
 
@@ -31,7 +31,7 @@ public static class Extension
 
         foreach (Transform child in children)   //모든 자식 오브젝트 삭제 
         {
-            //Managers.Resources.Destroy(child.GameObject);
+            Managers.Resource.Destroy(child.gameObject);
         }
     }
 

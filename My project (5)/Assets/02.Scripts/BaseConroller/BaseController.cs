@@ -10,7 +10,7 @@ public class BaseController : MonoBehaviour
 
     private void Awake()
     {
-        
+        Init();
     }
     public virtual bool Init()
     {

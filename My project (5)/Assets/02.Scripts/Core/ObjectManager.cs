@@ -35,7 +35,7 @@ public class ObjectManager
         Monsters.Clear();
     }
 
-    public T Spawn<T>(Vector3 position) where T : BaseController
+    public T Spawn<T>(Vector3 position) where T : BaseController    //where T의 자료형은 상속받은 클래스이거나 그 클래스의 파생 클래스여야한다.
     {
         System.Type type = typeof(T);
 

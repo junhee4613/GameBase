@@ -6,7 +6,7 @@ using System.Linq;
 using Random = UnityEngine.Random;
 using Transform = UnityEngine.Transform;
 
-public static class Utill
+public static class Util
 {
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
