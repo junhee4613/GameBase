@@ -41,7 +41,7 @@ public class ObjectManager
 
         if(type == typeof(MonsterController))
         {
-            GameObject go = Managers.ReSource.Instantiate("Monster", pooling: true);
+            GameObject go = Managers.Resource.Instantiate("Monster", pooling: true);
             MonsterController mc = go.GetOrAddComponent<MonsterController>();
             go.transform.position = position;
             Monsters.Add(mc);

@@ -74,35 +74,35 @@ public class ResourceManager
             _resources.Add(Key, op.Result);
             callback?.Invoke(op.Result);
         };
+    }
+    public void LoadAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
+    {
+        var OpHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
 
-        public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T: UnityEngine.Object
+        OpHandle.Completed += (op) =>
         {
-            var OpHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+            int loadCount = 0;
+            int totalCount = op.Result.Count;
 
-            OpHandle.Completed += (op) =>
+            foreach (var result in op.Result)
             {
-                int loadCount = 0;
-                int totalCount = op.Result.Count;
-
-                foreach (var result in op.Result)
+                if (result.PrimaryKey.Contains(".sprite"))
                 {
-                    if (result.PrimaryKey.Contains(".sprite"))
+                    LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
                     {
-                        LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
-                        {
-                            loadCount++;
-                            callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
-                        };
-                    }
-                    else
+                        loadCount++;
+                        callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                    });
+                }
+                else
+                {
+                    LoadAsync<T>(result.PrimaryKey, (obj) =>
                     {
-                        LoadAsync<T>(result.PrimaryKey, (obj) =>
-                        {
-                            loadCount++;
-                            callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
-                        };
-                    }
+                        loadCount++;
+                        callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                    });
                 }
             }
-        }
+        };
+    }
 }

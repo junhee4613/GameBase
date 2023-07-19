@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : BaseController
 {
     public float Timer = 2.0f;
 
@@ -13,7 +13,7 @@ public class MonsterController : MonoBehaviour
         if(Timer <= 0)
         {
             Timer = 2.0f;
-            //Manager.Object.Despawn(this);
+            Managers.Object.Despawn(this);
         }
     }
 }

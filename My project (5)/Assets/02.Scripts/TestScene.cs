@@ -7,9 +7,10 @@ public class TestScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Resource.LoadAllAsync<Object>("PreLoad", (key, count, totalCount)) =>{
-            Debug.Log("key : " + KeyCode + "Count" + count "totalCount : " + totalCount);
-        }
+        Managers.Resource.LoadAsync<Object>("PreLoad", (key, count, totalCount) =>
+        {
+            Debug.Log("key : " + key + "Count" + count + "totalCount : " + totalCount);
+        });
     }
 
     // Update is called once per frame
@@ -17,7 +18,7 @@ public class TestScene : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.F3))
         {
-            Managers.DestroyObject().Spawn<MonsterController>(new Vector3(Random.Range(0, 10), new Vector3(Random.Range(0, 10) , Random.Range(0, 10), Random.Range(0, 10);
+            Managers.Object.Spawn<MonsterController>(new Vector3(Random.Range(0, 10), Random.Range(0, 10) , Random.Range(0, 10)));
         }
     }
 }
