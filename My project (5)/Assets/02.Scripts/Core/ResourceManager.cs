@@ -12,7 +12,7 @@ public class ResourceManager
 {
     Dictionary<string, UnityEngine.Object> _resources = new Dictionary<string, Object>();
 
-    public T Load<T>(string key) where T : Object
+    public T Load<T>(string key) where T : Object   //Monster라는 키 값을 받음(1)
     {
         if(_resources.TryGetValue(key, out Object resource))
         {
@@ -33,14 +33,14 @@ public class ResourceManager
     }
     public GameObject Instantiate(string key, Transform parent = null, bool pooling = false)
     {
-        GameObject prefab = Load<GameObject>($"{key}");
-        if(prefab == null)
+        GameObject prefab = Load<GameObject>($"{key}"); //resource를 반환해줌 (2)
+        if(prefab == null)                              //null이 아니여서 패스
         {
             Debug.LogError($"Failed to load prefab : { key}");
             return null;
         }
 
-        if (pooling)
+        if (pooling)    //대괄호가 없어도 if문이 true일 때만 아래문이 동작하는데 이건 한 문장일 때만 적용됨 문장이 2줄일 경우 2번째 줄은 무시하고 한 문장만 실행됨
             return Managers.Pool.Pop(prefab);
 
         GameObject go = Object.Instantiate(prefab, parent);

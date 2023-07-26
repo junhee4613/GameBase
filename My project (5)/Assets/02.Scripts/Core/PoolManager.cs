@@ -63,7 +63,7 @@ public class PoolManager
 {
     Dictionary<string, Pool> _pools = new Dictionary<string, Pool>();
 
-    public GameObject Pop(GameObject prefab)
+    public GameObject Pop(GameObject prefab)        //해당 딕셔너리 안에 prefab이 없을 경우에 만들어주고 그 결과 값을 리턴해준다.
     {
         if (_pools.ContainsKey(prefab.name) == false)
             CreatePool(prefab);
