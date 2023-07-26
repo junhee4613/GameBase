@@ -16,6 +16,10 @@ public class TestScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Managers.UI.ShowToast("TestScene");
+        }
         if (Input.GetKeyUp(KeyCode.F3))
         {
             Managers.Object.Spawn<MonsterController>(new Vector3(Random.Range(0, 10), Random.Range(0, 10) , Random.Range(0, 10)));
