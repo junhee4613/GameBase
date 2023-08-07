@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c8876f166acd7da4d90be81dd6824c88
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 31d8a7b7d8bbf024e8e5a243fb70c3dd
+    m_Address: Assets/@Resources/UI/UIToast.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 62dc1558bfdea0c459e40d972d8dd7d9, type: 2}
   m_SchemaSet:
